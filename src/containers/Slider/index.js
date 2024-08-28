@@ -17,7 +17,7 @@ const Slider = () => {
     );
   };
   useEffect(() => {
-    if(byDateDesc) { nextCard(); console.log(byDateDesc) };
+    if(byDateDesc) { nextCard() };
   },[index,byDateDesc]);
   return (
     <div className="SlideCardList">

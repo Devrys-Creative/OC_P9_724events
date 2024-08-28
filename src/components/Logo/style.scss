@@ -1,3 +1,11 @@
 .Logo {
   margin: 22px;
+  &__svg {
+    &__text {
+      font-family: 'Kalimati';
+      font-size: 39px;
+      font-weight: 700;
+      white-space: pre;
+    }
+  }
 }
