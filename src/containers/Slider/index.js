@@ -17,7 +17,7 @@ const Slider = () => {
     );
   };
   useEffect(() => {
-    if(byDateDesc) { nextCard() };
+    if(byDateDesc) { nextCard(); console.log(byDateDesc) };
   },[index,byDateDesc]);
   return (
     <div className="SlideCardList">
@@ -42,7 +42,7 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc?.map((event, radioIdx) => (
             <input
-              key={`${event.id}`}
+              key={`slider-pagination-for-${event.title}`}
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
