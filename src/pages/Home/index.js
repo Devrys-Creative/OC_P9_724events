@@ -20,9 +20,9 @@ const Page = () => {
   const [last, setLast] = useState(null);
 
   useEffect(()=>{
-    if(!error && data!=='undefined') { setLast(data.events[data.events.length-1]); }
+    if(!error && data) { setLast(data.events[data.events.length-1]); }
   },[data]);
-  
+
   return <>
     <header>
       <Menu />
@@ -124,15 +124,18 @@ const Page = () => {
     </main>
     <footer className="row">
       <div className="col presta">
-        <h3>Notre derniére prestation</h3>
-        {error ? 'erreur' :
+        <h3>Notre dernière prestation</h3>
+        {error && <div>An error occured</div>}
+        {last === null ? (
+          "loading"
+        ) : (
         <EventCard
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
           small
           label="boom"
-        />}
+        />)}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
