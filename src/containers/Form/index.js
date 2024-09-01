@@ -14,7 +14,7 @@ const Form = ({ onSuccess, onError }) => {
       setSending(true);
       // We try to call mockContactApi
       try {
-        await mockContactApi();
+        await mockContactApi().then(() => onSuccess(true));
         setSending(false);
       } catch (err) {
         setSending(false);
