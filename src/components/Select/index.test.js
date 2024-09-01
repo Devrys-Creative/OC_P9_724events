@@ -42,7 +42,7 @@ describe("When a select is created", () => {
       expect(choice2).toBeInTheDocument();
     });
     describe("and a click is triggered on a choice item", () => {
-      it("a onChange callback is called", () => {
+      it("a onChange callback is called (with a correct value)", () => {
         const onChange = jest.fn();
         render(<Select selection={["value1", "value2"]} onChange={onChange} />);
         const collapseButtonElement = screen.getByTestId(
@@ -63,6 +63,7 @@ describe("When a select is created", () => {
             cancelable: true,
           })
         );
+        expect(onChange).toHaveBeenCalledWith("value1");
         expect(onChange.mock.calls.length).toBeGreaterThan(0);
 
         fireEvent(
@@ -81,6 +82,7 @@ describe("When a select is created", () => {
             cancelable: true,
           })
         );
+        expect(onChange).toHaveBeenCalledWith(null);
         expect(onChange.mock.calls.length).toBeGreaterThan(1);
       });
     });
