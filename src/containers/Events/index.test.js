@@ -45,11 +45,12 @@ describe("When Events is created", () => {
         <Events />
       </DataProvider>
     );
-    await screen.findByText("avril");
+    const elements = await screen.findAllByText("avril");
+    expect(elements.length).toBe(2);
   });
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {
-      api.loadData = jest.fn().mockRejectedValue();
+      api.loadData = jest.fn().mockRejectedValue(new Error("error"));
       render(
         <DataProvider>
           <Events />
@@ -59,7 +60,7 @@ describe("When Events is created", () => {
     });
   });
   describe("and we select a category", () => {
-    it.only("an filtered list is displayed", async () => {
+    it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
@@ -104,8 +105,8 @@ describe("When Events is created", () => {
         })
       );
 
-      await screen.findByText("24-25-26 Février");
-      await screen.findByText("1 site web dédié");
+      expect(await screen.findByText("24-25-26 Février")).toBeInTheDocument();
+      expect(await screen.findByText("1 site web dédié")).toBeInTheDocument();
     });
   });
 });
