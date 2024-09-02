@@ -65,11 +65,11 @@ const Page = () => {
           </ServiceCard>
         </div>
       </section>
-      <section className="EventsContainer" id="nos-realisations">
+      <section className="EventsContainer" id="nos-realisations" data-testid="events-testid">
         <h2 className="Title">Nos réalisations</h2>
         <EventList />
       </section>
-      <section className="PeoplesContainer" id="notre-equipe">
+      <section className="PeoplesContainer" id="notre-equipe" data-testid="people-testid">
         <h2 className="Title">Notre équipe</h2>
         <p>Une équipe d’experts dédiés à l’ogranisation de vos événements</p>
         <div className="ListContainer">
@@ -127,7 +127,7 @@ const Page = () => {
         </Modal>
       </div>
     </main>
-    <footer className="row">
+    <footer className="row" data-testid="footer-testid">
       <div className="col presta">
         <h3>Notre dernière prestation</h3>
         {error && <div>An error occured</div>}
