@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import { api, DataProvider } from "../../contexts/DataContext";
 import Events from "./index";
 
@@ -40,33 +40,39 @@ const data = {
 describe("When Events is created", () => {
   it("a list of event card is displayed", async () => {
     api.loadData = jest.fn().mockReturnValue(data);
-    render(
+    await act( async () => {
+      render(
       <DataProvider>
         <Events />
       </DataProvider>
-    );
+      )
+    });
     const elements = await screen.findAllByText("avril");
     expect(elements.length).toBe(2);
   });
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {
       api.loadData = jest.fn().mockRejectedValue(new Error("error"));
-      render(
+      await act( async () => {
+        render(
         <DataProvider>
           <Events />
         </DataProvider>
-      );
+        )
+      });
       expect(await screen.findByText("An error occured")).toBeInTheDocument();
     });
   });
   describe("and we select a category", () => {
     it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
-      render(
+      await act( async () => {
+        render(
         <DataProvider>
           <Events />
         </DataProvider>
-      );
+        )
+      });
       await screen.findByText("Forum #productCON");
       fireEvent(
         await screen.findByTestId("collapse-button-testid"),
@@ -91,11 +97,13 @@ describe("When Events is created", () => {
   describe("and we click on an event", () => {
     it("the event detail is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
-      render(
+      await act( async () => {
+        render(
         <DataProvider>
           <Events />
         </DataProvider>
-      );
+        )
+      });
 
       fireEvent(
         await screen.findByText("Conférence #productCON"),
